@@ -1,0 +1,31 @@
+<ion-header><ion-toolbar><ion-title>Crear Aviso</ion-title></ion-toolbar></ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input formControlName="title"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      <span *ngIf="form.get('title')?.errors?.['required']">El título es obligatorio.</span>
+      <span *ngIf="form.get('title')?.errors?.['minlength']">Mínimo 5 caracteres.</span>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Fotografía</ion-label>
+      <ion-button type="button" expand="block" (click)="takePhoto()">Tomar foto</ion-button>
+    </ion-item>
+    <img *ngIf="photoDataUrl" [src]="photoDataUrl" style="width:100%; margin:8px 0;"/>
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+    <ion-note color="danger" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
+      <span *ngIf="form.get('description')?.errors?.['required']">La descripción es obligatoria.</span>
+      <span *ngIf="form.get('description')?.errors?.['minlength']">Mínimo 20 caracteres.</span>
+    </ion-note>
+
+    <ion-button type="submit" expand="block" [disabled]="submitting">GUARDAR</ion-button>
+  </form>
+</ion-content>

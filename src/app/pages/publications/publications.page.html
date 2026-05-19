@@ -1,0 +1,25 @@
+<ion-header><ion-toolbar><ion-title>Publicaciones</ion-title></ion-toolbar></ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let pub of publications">
+      <ion-thumbnail slot="start" *ngIf="pub.photo">
+        <img [src]="pub.photo"/>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ pub.title }}</h2>
+        <p>{{ pub.description }}</p>
+        <small>{{ pub.createdAt | dateFormat }}</small>
+      </ion-label>
+      <ion-button fill="clear" color="danger" slot="end" (click)="confirmDelete(pub.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNew()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
